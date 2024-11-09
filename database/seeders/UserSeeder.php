@@ -9,53 +9,35 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-         //users
-         $users = [
-            [
-                // admin
-                'name' => "admin",
-                'email' => "admin@example.com",
-                'password' => "admin",
-                'role' => 'admin'
-            ],
-            [
-                // pengurus
-                'name' => "pengurus",
-                'email' => "pengurus@example.com",
-                'password' => "pengurus",
-                'role' => 'pengurus'
-            ],
-            [
-                // santri
-                'name' => "santri",
-                'email' => "santri@example.com",
-                'password' => "santri",
-                'role' => 'santri'
+        // Membuat user admin
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin'), 
+        ]);
+        $admin->assignRole('admin');
 
-            ],
-            [
-                // parent
-                'name' => "parent",
-                'email' => "parent@example.com",
-                'password' => "parent",
-                'role' => 'parent'
+        $pengurus = User::create([
+            'name' => 'pengurus',
+            'email' => 'pengurus@example.com',
+            'password' => Hash::make('pengurus'), 
+        ]);
+        $pengurus->assignRole('pengurus');
 
-            ],
-        ];
+        $santri = User::create([
+            'name' => 'santri',
+            'email' => 'santri@example.com',
+            'password' => Hash::make('santri'), 
+        ]);
+        $santri->assignRole('santri');
 
-        foreach ($users as $user) {
-            $created_user = User::create([
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => Hash::make($user['password'])
-            ]);
-
-            $created_user->assignRole($user['role']);
-        }
+        $parent = User::create([
+            'name' => 'parent',
+            'email' => 'parent@example.com',
+            'password' => Hash::make('parent'), 
+        ]);
+        $parent->assignRole('parent');
     }
 }
