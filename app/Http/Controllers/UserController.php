@@ -11,10 +11,19 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        $users = User::with('roles')->get();
+        $users = User::latest()->paginate(10);
+        // $users = User::with('roles')->get();
+        // $users->latest->pagination(10);
+        // $roles = Role::all();
         // dd($users); // Untuk memastikan data user dan role sudah terload
         return view('users.index', compact('users'));
+
+        // $users = User::whereHas('roles', function ($query) {
+        //     $query->where('name', 'admin'); // Sesuaikan 'name' jika nama kolom berbeda
+        // })->with('roles')->latest()->paginate(10);
+        
+        // return view('users.index', compact('users'));
+        
     }
 
     public function create()
